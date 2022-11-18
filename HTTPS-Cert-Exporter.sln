@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Export.All.SSL.Certificates.from.HTTPS.URL", "Export.All.SSL.Certificates.from.HTTPS.URL\Export.All.SSL.Certificates.from.HTTPS.URL.csproj", "{B4CF7DFE-02AD-4CDD-99A8-4C3D52D44CD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTTPS-Cert-Exporter", "HTTPS-Cert-Exporter\HTTPS-Cert-Exporter.csproj", "{B4CF7DFE-02AD-4CDD-99A8-4C3D52D44CD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

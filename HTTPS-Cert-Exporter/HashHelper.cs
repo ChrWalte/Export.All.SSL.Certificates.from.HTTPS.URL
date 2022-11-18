@@ -1,11 +1,11 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Export.All.SSL.Certificates.from.HTTPS.URL;
+namespace HTTPS.Cert.Exporter;
 
 internal class HashHelper
 {
-    public static string Sha512Hash(string input)
+    public static string Sha512Hash(string input, int length = Constants.Ten)
     {
         using var sha512 = SHA512.Create();
 
@@ -14,6 +14,6 @@ internal class HashHelper
         foreach (var b in sha512.ComputeHash(inputBytes))
             stringBuilder.Append(b.ToString("x2"));
 
-        return stringBuilder.ToString()[..Constants.Ten];
+        return stringBuilder.ToString()[..length];
     }
 }

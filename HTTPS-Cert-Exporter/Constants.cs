@@ -1,8 +1,8 @@
-﻿namespace Export.All.SSL.Certificates.from.HTTPS.URL;
+﻿namespace HTTPS.Cert.Exporter;
 
 internal class Constants
 {
-    public const string ProgramName = "Export.All.SSL.Certificates.from.HTTPS.URL";
+    public const string ProgramName = "HTTPS-Cert-Exporter";
     public const string ExportedCertificatesFolderName = "Exported-HTTPS-SSL-Certificates";
     public const string DefaultHttpsUrl = "https://duckduckgo.com/";
 
@@ -19,5 +19,6 @@ internal class Constants
     public const string CertificateFileHeader = "-----BEGIN CERTIFICATE-----";
     public const string CertificateFileFooter = "-----END CERTIFICATE-----";
 
-    public const string SerilogOutputTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}";
+    public const string SerilogOutputTemplate =
+        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}";
 }
