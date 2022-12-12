@@ -82,21 +82,33 @@ try
     // initialize httpsClientHandler to download certificates
     var httpClientHelper = new HttpClientHelper(logger);
     using var httpsClientHandler = new HttpClientHandler
-        { ServerCertificateCustomValidationCallback = httpClientHelper.ServerCertificateCustomValidationCallback };
+    {
+        ServerCertificateCustomValidationCallback = httpClientHelper.ServerCertificateCustomValidationCallback,
+        UseDefaultCredentials = true
+    };
 
     // initialize HttpClient using httpsClientHandler
     using var httpsClient = new HttpClient(httpsClientHandler);
     logger.Debug("initialize HttpClient using httpsClientHandler");
     foreach (var httpsUrl in httpsUrls)
-    {
-        // make a HTTPS GET Request to httpsUrl
-        var httpsResponse = await httpsClient.GetAsync(httpsUrl);
-        logger.Information("HTTPS GET {0}", httpsUrl[8..]);
+        try
+        {
+            // make a HTTPS GET Request to httpsUrl
+            var httpsResponse = await httpsClient.GetAsync(httpsUrl);
+            logger.Information("HTTPS GET {0}", httpsUrl[8..]);
 
-        // ensure httpsResponse has Success Status Code
-        httpsResponse.EnsureSuccessStatusCode();
-        logger.Information("HTTPS GET Status Code: {0}", httpsResponse.StatusCode);
-    }
+            // ensure httpsResponse has Success Status Code
+            httpsResponse.EnsureSuccessStatusCode();
+            logger.Information("HTTPS GET Status Code: {0}", httpsResponse.StatusCode);
+        }
+        catch (Exception ex)
+        {
+            // something went wrong, log it
+            var exGuid = Guid.NewGuid();
+            Console.WriteLine(
+                $"[{Constants.ProgramName}]> SOMETHING WENT WRONG: [Exception GUID: {exGuid}]: {ex.Message}");
+            logger.Fatal(ex, "something went wrong: [{0}]", exGuid);
+        }
 }
 catch (Exception ex)
 {
