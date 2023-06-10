@@ -114,7 +114,7 @@ catch (Exception ex)
 {
     // something went wrong, log it
     var exGuid = Guid.NewGuid();
-    Console.WriteLine($"[{Constants.ProgramName}]> SOMETHING WENT WRONG: [Exception GUID: {exGuid}]: {ex.Message}");
+    Console.WriteLine($"[{Constants.ProgramName}]> SOMETHING WENT FATALLY WRONG: [Exception GUID: {exGuid}]: {ex.Message}");
     logger.Fatal(ex, "something went wrong: [{0}]", exGuid);
 }
 

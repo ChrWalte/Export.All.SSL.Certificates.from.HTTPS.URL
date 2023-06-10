@@ -40,7 +40,6 @@ internal class HttpClientHelper
             _logger.Warning("created {0} directory", Constants.ExportedCertificatesFolderName);
         }
 
-
         try
         {
             // create x509CertificateChain using certificate file formats
@@ -135,9 +134,11 @@ internal class HttpClientHelper
                 Console.WriteLine($"[{Constants.ProgramName}]> WROTE CERTIFICATE TO FILE");
                 Console.WriteLine($"[{Constants.ProgramName}]> WROTE CERTIFICATE INFORMATION TO JSON FILE");
 
+#pragma warning disable CA1416
                 // built it Windows X509Certificate2UI (WINDOWS ONLY)
                 // https://stackoverflow.com/questions/15270764/get-ssl-certificate-in-net
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+                if (isWindows)
                     new Thread(() =>
                         {
                             _logger.Information("showing certificate in Windows X509Certificate2UI");
@@ -145,11 +146,12 @@ internal class HttpClientHelper
                                 $"[{Constants.ProgramName}]> SHOWING CERTIFICATE IN WINDOWS X509Certificate2UI...");
 
                             // check for Windows again to suppress warning...
-                            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                            if (isWindows)
                                 X509Certificate2UI.DisplayCertificate(
                                     new X509Certificate2(x509CertificateChainFilePath));
                         }
                     ).Start();
+#pragma warning restore CA1416
             }
             else
             {
